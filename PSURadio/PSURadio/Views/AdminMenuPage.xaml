@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PSURadio.Views.AdminMenuPage"
+             Title="Меню администратора">
+
+    <ContentPage.Resources>
+        <Style TargetType="StackLayout">
+            <Setter Property="Spacing" Value="20"/>
+            <Setter Property="Padding" Value="20"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="BackgroundColor" Value="#2196F3"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <Label Text="Меню администратора"
+                   FontSize="Large"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#333"/>
+            <Label Text="Выберите действие:"
+                   FontSize="Medium"
+                   HorizontalOptions="Center"
+                   TextColor="#555"
+                   Margin="0,0,0,20"/>
+            <Button Text="Добавить автора" 
+                    Command="{Binding NavigateCommand}" 
+                    CommandParameter="AddAuthor" />
+            <Button Text="Удалить автора" 
+                    Command="{Binding NavigateCommand}" 
+                    CommandParameter="DeleteAuthor" />
+            <Button Text="Передать права администратора" 
+                    Command="{Binding NavigateCommand}" 
+                    CommandParameter="TransferAdminRights"
+                    HeightRequest="65"/>
+            <Button Text="Очистить чат"
+                    Command="{Binding ClearChatCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

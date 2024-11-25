@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PSURadio.Views.CreateNewsPage"
+             Title="Создать новость">
+
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="AliceBlue" />
+        </Style>
+        <Style x:Key="TitleLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="Margin" Value="10,0" />
+        </Style>
+        <Style x:Key="DateLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="LightGray" />
+            <Setter Property="Margin" Value="10,0" />
+        </Style>
+        <Style x:Key="ContentLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="TextColor" Value="#1C1C1C" />
+            <Setter Property="Margin" Value="10,0" />
+        </Style>
+        <Style x:Key="FrameStyle" TargetType="Frame">
+            <Setter Property="HasShadow" Value="True" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="BackgroundColor" Value="#909370db" />
+        </Style>
+        <Style x:Key="EntryStyle" TargetType="Entry">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="Margin" Value="10,0" />
+        </Style>
+        <Style x:Key="EditorStyle" TargetType="Editor">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="Margin" Value="10,0" />
+            <Setter Property="HeightRequest" Value="200" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Padding="10">
+                <Frame Style="{StaticResource FrameStyle}" Padding="0">
+                    <Image Source="default_image.jpg" HeightRequest="200" Aspect="AspectFill" />
+                </Frame>
+                <Button Text="Изменить изображение" Command="{Binding ChangeImageCommand}" />
+
+                <Frame Style="{StaticResource FrameStyle}">
+                    <StackLayout>
+                        <Entry Text="{Binding Title}" Style="{StaticResource EntryStyle}" Placeholder="Введите заголовок" />
+                        <BoxView HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" Margin="10,0" />
+                        <Label Text="{Binding PublishedDate, StringFormat='{0:dd.MM.yyyy}'}" Style="{StaticResource DateLabelStyle}" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame Style="{StaticResource FrameStyle}">
+                    <Editor Text="{Binding Text}" Style="{StaticResource EditorStyle}" Placeholder="Введите текст новости" />
+                </Frame>
+
+                <Button Text="Создать" Command="{Binding CreateCommand}" TextColor="White" Margin="0,20,0,0" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

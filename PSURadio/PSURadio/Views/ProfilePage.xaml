@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PSURadio.Views.ProfilePage"
+             Title="Профиль">
+
+    <ScrollView>
+        <StackLayout Padding="20">
+            <!-- Profile Image -->
+            <Frame WidthRequest="200" HeightRequest="200" CornerRadius="100" Padding="0" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center">
+                <Image x:Name="ProfileImage"
+                   Source="{Binding ProfileImageSource}"
+                   WidthRequest="200"
+                   HeightRequest="200"
+                   Aspect="AspectFill" />
+            </Frame>
+
+            <!-- Username -->
+            <Label
+                Text="{Binding UserName}"
+                TextColor="#1C1C1C"
+                FontSize="Large"
+                HorizontalOptions="Center"
+                Margin="0,20,0,0" />
+            <Label
+                Text="{Binding UserRole}"
+                TextColor="#1C1C1C"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                Margin="0,10,0,20" />
+
+            <!-- Buttons Section -->
+            <Frame
+                BackgroundColor="LightGray"
+                Padding="10"
+                CornerRadius="10">
+                <StackLayout>
+                    <Button
+                        Text="Изменить фотографию профиля"
+                        Command="{Binding ChangeProfileImageCommand}" />
+                    <Button
+                        Text="Изменить имя пользователя"
+                        Command="{Binding ChangeUserNameCommand}"
+                        Margin="0,10,0,0" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Email Section -->
+            <Frame
+                BackgroundColor="LightGray"
+                Padding="10"
+                CornerRadius="10"
+                Margin="0,20,0,20">
+                <StackLayout>
+                    <Label
+                        Text="E-mail: "
+                        FontSize="Medium" />
+                    <Label
+                        Text="{Binding Email}"
+                        FontSize="Medium"
+                        Margin="0,0,0,10" />
+                    <Button
+                        Text="Изменить e-mail"
+                        Command="{Binding ChangeEmailCommand}" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Logout Button -->
+            <Button
+                Text="Выйти из профиля"
+                Command="{Binding LogoutCommand}"
+                BackgroundColor="Red"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="50" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
+

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:PSURadio.Views"
+       Title="PSURadio"
+       xmlns:views="clr-namespace:PSURadio.Views"
+       x:Class="PSURadio.AppShell">
+
+    <!--
+        The overall app visual hierarchy is defined here, along with navigation.
+    
+        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
+    -->
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="MediumPurple" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="Blue" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+                <Setter Property="Shell.FlyoutBackgroundColor" Value="MediumPurple" />
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+
+            <!--
+            Default Styles for all Flyout Items
+            https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyoutitem-and-menuitem-style-classes
+            -->
+            <Style Class="FlyoutItemLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="White"></Setter>
+            </Style>
+            <Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{x:OnPlatform UWP=Transparent, iOS=White}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <!--
+            Custom Style you can apply to any Flyout Item
+            -->
+            <Style Class="MenuItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Primary}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+            <!--
+            Styles for Flyout Page
+            -->
+        </ResourceDictionary>
+    </Shell.Resources>
+    
+    <!-- Заголовок Flyout -->
+    <!--<Shell.FlyoutHeader>
+        <StackLayout BackgroundColor="White" Padding="10">
+            <Image HeightRequest="100" Source="default_user.jpg"/>
+            <Label Text="Гость" FontSize="20" FontAttributes="Bold"/>
+        </StackLayout>
+    </Shell.FlyoutHeader>-->
+    <Shell.FlyoutHeader>
+        <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center">
+            <Frame WidthRequest="100" HeightRequest="100" CornerRadius="50" Padding="0" HasShadow="False" HorizontalOptions="Center" VerticalOptions="Center">
+                <Image x:Name="ProfileImage"
+                   Source="{Binding ProfileImageSource}"
+                   WidthRequest="100"
+                   HeightRequest="100"
+                   Aspect="AspectFill" />
+            </Frame>
+            <Label x:Name="UserName"
+               Text="{Binding UserName}"
+               FontSize="Medium"
+               HorizontalOptions="Center" />
+            <Label x:Name="UserRole"
+               Text="{Binding UserRole}"
+               FontSize="Small"
+               HorizontalOptions="Center" />
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding NavigateToProfileCommand}"/>
+            </StackLayout.GestureRecognizers>
+            <StackLayout.Triggers>
+                <DataTrigger TargetType="StackLayout" Binding="{Binding IsGuest}" Value="true">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger TargetType="StackLayout" Binding="{Binding IsGuest}" Value="false">
+                    <Setter Property="IsEnabled" Value="True"/>
+                </DataTrigger>
+            </StackLayout.Triggers>
+        </StackLayout>
+    </Shell.FlyoutHeader>
+
+    <!-- 
+        When the Flyout is visible this defines the content to display in the flyout.
+        FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element    
+        https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
+    -->
+    <FlyoutItem Title="Главная" Icon="icon_about.png">
+        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Новости" Icon="icon_feed.png">
+        <ShellContent ContentTemplate="{DataTemplate local:NewsPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Подкасты" Icon="headphones.png">
+        <ShellContent ContentTemplate="{DataTemplate local:PodcastsPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Плейлисты" Icon="list.png">
+        <ShellContent ContentTemplate="{DataTemplate local:PlaylistsPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Наша команда" Icon="team.png">
+        <ShellContent ContentTemplate="{DataTemplate local:TeamPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Чат" Icon="chat.png" x:Name="ListenerItem">
+        <ShellContent ContentTemplate="{DataTemplate local:ChatPage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Создать материал" Icon = "plus.png" x:Name="AuthorItem">
+        <ShellContent ContentTemplate="{DataTemplate local:CreateMaterialPage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Меню администратора" Icon="admin.jpg" x:Name="AdminItem">
+        <ShellContent ContentTemplate="{DataTemplate local:AdminMenuPage}"/>
+    </FlyoutItem>
+    <FlyoutItem Title="Войти" Icon="door.png" x:Name="GuestItem">
+        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
+    </FlyoutItem>
+    <MenuItem Text="Перейти в VK" IconImageSource="vk.png"></MenuItem>
+    <MenuItem Text="Перейти на сайт" IconImageSource="www.png"></MenuItem>
+
+
+</Shell>

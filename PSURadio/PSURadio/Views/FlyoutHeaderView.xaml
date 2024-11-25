@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PSURadio.Views.FlyoutHeaderView"
+             Padding="10">
+    <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+        <Image x:Name="ProfileImage"
+               Source="{Binding ProfileImageSource}"
+               WidthRequest="100"
+               HeightRequest="100"
+               Aspect="AspectFill"
+               VerticalOptions="Center" />
+        <Label x:Name="UserName"
+               Text="{Binding UserName}"
+               FontSize="Medium"
+               HorizontalOptions="Center" />
+        <Label x:Name="UserRole"
+               Text="{Binding UserRole}"
+               FontSize="Small"
+               HorizontalOptions="Center" />
+    </StackLayout>
+</ContentView>

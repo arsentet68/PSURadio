@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PSURadio.Views.MainPage"
+             Title="Главная">
+
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="AliceBlue" />
+        </Style>
+        <Style x:Key="SectionTitleStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="Margin" Value="10,0" />
+        </Style>
+        <Style x:Key="ItemTitleStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+        <Style x:Key="CardStyle" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="#909370db" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="Margin" Value="10,5" />
+            <Setter Property="HasShadow" Value="True" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Image Source="radio_psu_banner.jpg" Aspect="Fill" HeightRequest="150"/>
+                <Button x:Name="ChatButton" Text="Чат с ведущими" Margin="10,0" BackgroundColor="MediumPurple" TextColor="White" FontSize="20" />
+
+                <Label Text="А ещё у нас есть..." FontSize="30" FontAttributes="Bold" Margin="10,0" TextColor="White" HorizontalOptions="Center"/>
+
+                <Frame Style="{StaticResource CardStyle}">
+                    <StackLayout>
+                        <Label Text="Новости" Style="{StaticResource SectionTitleStyle}" />
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <!-- News 1 -->
+                            <StackLayout>
+                                <Image Source="OGXHlC8.jpg" Aspect="AspectFill" HeightRequest="100" WidthRequest="100">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.NavigateToNewsDetailCommand}" CommandParameter="{Binding RecentNews[0]}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Label Text="Мама, я буду ведущим РАДИО ПГУ" Style="{StaticResource ItemTitleStyle}" />
+                            </StackLayout>
+                            <!-- News 2 -->
+                            <StackLayout>
+                                <Image Source="igri_razuma.jpg" Aspect="AspectFill" HeightRequest="100" WidthRequest="100">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.NavigateToNewsDetailCommand}" CommandParameter="{Binding RecentNews[1]}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Label Text="Радио ПГУ едет на «Игры разума»" Style="{StaticResource ItemTitleStyle}" />
+                            </StackLayout>
+                            <!-- News 3 -->
+                            <StackLayout>
+                                <Image Source="radiostation.jpg" Aspect="AspectFill" HeightRequest="100" WidthRequest="100">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.NavigateToNewsDetailCommand}" CommandParameter="{Binding RecentNews[2]}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Label Text="Команда Радио ПГУ в гостях у радиостанций" Style="{StaticResource ItemTitleStyle}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Style="{StaticResource CardStyle}">
+                    <StackLayout>
+                        <Label Text="Подкасты" Style="{StaticResource SectionTitleStyle}" />
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <!-- Podcast 1 -->
+                            <StackLayout>
+                                <Image Source="iskus.jpg" Aspect="AspectFill" HeightRequest="100" WidthRequest="100">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.NavigateToPodcastDetailCommand}" CommandParameter="{Binding RecentPodcasts[0]}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Label Text="«По характеру я очень добрый. Мне тяжело даëтся этот вид спорта»" Style="{StaticResource ItemTitleStyle}" />
+                            </StackLayout>
+                            <!-- Podcast 2 -->
+                            <StackLayout>
+                                <Image Source="chur.jpg" Aspect="AspectFill" HeightRequest="100" WidthRequest="100">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.NavigateToPodcastDetailCommand}" CommandParameter="{Binding RecentPodcasts[1]}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Label Text="Включай самое музыкальное шоу «Спроси автора»🎤" Style="{StaticResource ItemTitleStyle}" />
+                            </StackLayout>
+                            <!-- Podcast 3 -->
+                            <StackLayout>
+                                <Image Source="kvn.jpg" Aspect="AspectFill" HeightRequest="100" WidthRequest="100">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.NavigateToPodcastDetailCommand}" CommandParameter="{Binding RecentPodcasts[2]}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                <Label Text="В сети новый выпуск шоу «Спроси автора» 🔥" Style="{StaticResource ItemTitleStyle}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <StackLayout Orientation="Horizontal" Padding="10">
+                    <Image Source="contact.png" Aspect="AspectFit" HeightRequest="50" WidthRequest="50"/>
+                    <StackLayout>
+                        <Label Text="radio.psu.ru" TextColor="#1C1C1C" FontSize="20"/>
+                        <Label Text="vk.com/radio_psu" TextColor="#1C1C1C" FontSize="20"/>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

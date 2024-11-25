@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PSURadio.Views"
+             x:Class="PSURadio.Views.PlaylistsPage"
+             Title="Плейлисты">
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="AliceBlue" />
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ListView ItemsSource="{Binding PlaylistsCollection}"
+                  HasUnevenRows="True"
+                  SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Frame Margin="10"
+                               Padding="10"
+                               CornerRadius="10"
+                               HasShadow="True"
+                               BackgroundColor="#909370db">
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding ImageSource}"
+                                       WidthRequest="100"
+                                       HeightRequest="100"
+                                       Aspect="AspectFill"
+                                       VerticalOptions="CenterAndExpand">
+                                    <Image.Triggers>
+                                        <DataTrigger TargetType="Image"
+                                                     Binding="{Binding ImageSource}"
+                                                     Value="">
+                                            <Setter Property="Source" Value="default_image.jpg" />
+                                        </DataTrigger>
+                                    </Image.Triggers>
+                                </Image>
+                                <StackLayout Margin="10,0,0,0"
+                                             VerticalOptions="CenterAndExpand">
+                                    <Label Text="{Binding Title}"
+                                           FontSize="16"
+                                           FontAttributes="Bold" />
+                                    <Label Text="{Binding PublishedDate, StringFormat='{0:dd.MM.yyyy}'}"
+                                           FontSize="14"
+                                           TextColor="Black" />
+                                </StackLayout>
+                            </StackLayout>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type local:PlaylistsPage}}, Path=BindingContext.PlaylistTappedCommand}" CommandParameter="{Binding .}" />
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</ContentPage>

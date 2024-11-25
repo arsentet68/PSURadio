@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PSURadio.Views"
+             xmlns:converters="clr-namespace:PSURadio.Converters"
+             x:Class="PSURadio.Views.AddAuthorPage"
+             Title="Добавить автора">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter" />
+            <Style x:Key="SearchBarStyle" TargetType="SearchBar">
+                <Setter Property="BackgroundColor" Value="#F0F0F0" />
+                <Setter Property="PlaceholderColor" Value="#A9A9A9" />
+                <Setter Property="TextColor" Value="#333333" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Margin" Value="0,10,0,0" />
+                <Setter Property="HeightRequest" Value="50" />
+            </Style>
+            <Style x:Key="ListViewStyle" TargetType="ListView">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="SeparatorColor" Value="#CCCCCC" />
+            </Style>
+            <Style x:Key="UserImageStyle" TargetType="Image">
+                <Setter Property="WidthRequest" Value="50" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="Aspect" Value="AspectFill" />
+                <Setter Property="Margin" Value="0,0,15,0" />
+                <Setter Property="HorizontalOptions" Value="Start" />
+            </Style>
+            <Style x:Key="UserLabelStyle" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="TextColor" Value="#333333" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <SearchBar Placeholder="Поиск пользователей"
+                       Style="{StaticResource SearchBarStyle}"
+                       Text="{Binding SearchText}"
+                       SearchCommand="{Binding SearchCommand}" />
+            <ListView ItemsSource="{Binding Users}"
+                      ItemSelected="OnUserSelected"
+                      Style="{StaticResource ListViewStyle}"
+                      RowHeight="80">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Padding="10" BackgroundColor="#FFFFFF" Margin="0,0,0,10" CornerRadius="10" HasShadow="True" HeightRequest="80">
+                                <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                                    <Frame Padding="0" HasShadow="False" IsClippedToBounds="True" CornerRadius="25">
+                                        <Image Source="{Binding ProfilePic, Converter={StaticResource ByteArrayToImageSourceConverter}}" Style="{StaticResource UserImageStyle}"/>
+                                    </Frame>
+                                    <Label Text="{Binding Username}" Style="{StaticResource UserLabelStyle}" />
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
